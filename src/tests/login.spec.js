@@ -2,10 +2,11 @@ const { expect } = require('@wdio/globals');
 const LoginPage = require('../ui/pages/LoginPage');
 const MenuPage = require('../ui/pages/MenuPage');
 const LogoutModal = require('../ui/components/modals/LogoutModal');
-const NavigationBar = require('../ui/components/NavigationBarComponent');
+const NavigationBar = require('../ui/components/navigation/NavigationBarComponent');
 
 describe('Successful login page tests', () => {
     beforeEach(async () => {
+        await driver.relaunchActiveApp();
         await NavigationBar.openMenu();
         await MenuPage.clickLoginBtn();
     });
@@ -18,6 +19,7 @@ describe('Successful login page tests', () => {
     })
 
     afterEach(async () => {
+        await NavigationBar.openMenu();
         await MenuPage.logout();
         if (driver.isAndroid) await LogoutModal.confirmLogout();
     })

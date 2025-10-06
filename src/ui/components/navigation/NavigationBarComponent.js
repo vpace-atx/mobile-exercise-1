@@ -26,18 +26,20 @@ class NavigationBarComponent {
             : $('~AppTitle Icons'); // iOS
     }
 
+    /**
+     * Clicks the Menu tab from the Navigation bar to open the menu page.
+     * @returns {void}
+     */
     async openMenu() {
         await this.menuTabBtn.click();
     }
 
+    /**
+     * Clicks the Cart tab from the Navigation bar to open the cart page.
+     * @returns {void}
+     */
     async openCart() {
         await this.cartTabBtn.click();
-    }
-
-    async openCatalog() {
-        driver.isAndroid
-            ? await this.menuTabBtn.click().catalogTabBtn.click()
-            : await this.catalogTabBtn.click();
     }
 }
 

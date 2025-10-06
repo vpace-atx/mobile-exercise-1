@@ -1,7 +1,6 @@
-const { $ } = require('@wdio/globals')
-const Page = require('./BasePage');
+const { $ } = require('@wdio/globals');
 
-class ProductPage extends Page {
+class ProductPage {
     get addToCartBtn() {
         return driver.isAndroid
             ? $('~Tap to add product to cart') // Android
@@ -9,24 +8,10 @@ class ProductPage extends Page {
 
     }
 
-    get quantityPlusBtn() {
-        return driver.isAndroid
-            ? $('~Increase item quantity') // Android
-            : $('~AddPlus Icons'); // iOS
-    }
-
-    get quantityMinusBtn() {
-        return driver.isAndroid
-            ? $('~Decrease item quantity') // Android
-            : $('~SubtractMinus Icons'); // iOS
-    }
-
-    get getPriceText() {
-        return driver.isAndroid
-            ? $('[id="com.saucelabs.mydemoapp.android:id/priceTV"]') // Android
-            : $('~Price'); // iOS
-    }
-
+    /**
+     * Adds a specific item to the cart.
+     * @returns {void}
+     */
     async addItemToCart() {
         await this.addToCartBtn.click();
     }

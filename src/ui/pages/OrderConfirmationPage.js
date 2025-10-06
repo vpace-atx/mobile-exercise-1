@@ -1,7 +1,6 @@
-const { $ } = require('@wdio/globals')
-const Page = require('./BasePage');
+const { $ } = require('@wdio/globals');
 
-class CartPage extends Page {
+class CartPage {
     get checkoutCompleteText() {
         return driver.isAndroid
             ? $('[id="com.saucelabs.mydemoapp.android:id/completeTV"]') // Android

@@ -1,7 +1,6 @@
-const { $ } = require('@wdio/globals')
-const Page = require('./BasePage');
+const { $ } = require('@wdio/globals');
 
-class CartPage extends Page {
+class CartPage {
     get proceedToCheckoutBtn() {
         return driver.isAndroid
             ? $('~Confirms products for checkout') // Android
@@ -27,14 +26,12 @@ class CartPage extends Page {
             : $(`-ios class chain:${iosSelector}`); // iOS
     }
 
-    get pricePerItemTextAndroid() {
-        return $('[id="com.saucelabs.mydemoapp.android:id/priceTV"]'); // Android
-
-    }
-
-    pricePerItemTextIOS(price) {
-        const iosSelector = `**/XCUIElementTypeStaticText[\`name == "$ ${price}"]"\`]`;
-        return $(`-ios class chain:${iosSelector}`); // iOS
+    get emptyCartText() {
+        const androidSelector = 'new UiSelector().text("Oh no! Your cart is empty. Fill it up with swag to complete your purchase.")'
+        const iosSelector = '**/XCUIElementTypeStaticText[`name == "Oh no! Your cart is empty. Fill it up with swag to complete your purchase."`]'
+        return driver.isAndroid
+            ? $(`android=${androidSelector}`) // Android
+            : $(`-ios class chain:${iosSelector}`); // iOS
     }
 
     get itemQuantityTextAndroid() {
@@ -60,23 +57,45 @@ class CartPage extends Page {
     }
 
     totalQuantityTextIOS(quantity) {
-        const iosSelector = `**/XCUIElementTypeStaticText[\`name == "${quantity}"\`]`;
-        return  $(`-ios class chain:${iosSelector}`) // iOS
+        return  $(`~${quantity} Items`) // iOS
     }
 
+    /**
+     * Clicks the Cart tab from the Navigation bar to open the cart page.
+     * @returns {void}
+     */
     async proceedToCheckout() {
         await this.proceedToCheckoutBtn.click();
     }
 
+    /**
+     * Subtracts one of a particular item from cart.
+     * @returns {void}
+     */
     async subtractOneItem() {
-        await this.quantityPlusBtn.click();
+        await this.quantityMinusBtn.click();
     }
 
+    /**
+     * Adds one more of a particular item to cart.
+     * @returns {void}
+     */
     async addOneItem() {
         await this.quantityPlusBtn.click();
     }
 
-    async RemoveItem() {
+    /**
+     * Adds number of a particular item to cart. Iterates over loop that number of times to adds item.
+     * @param {number} quantity - The number of the item to be added
+     * @returns {void}
+     */
+    async addQuantityOfItem(quantity) {
+        for (let i = 0; i < quantity; i++) {
+            await this.quantityPlusBtn.click();
+        }
+    }
+
+    async removeItem() {
         await this.removeItemBtn.click();
     }
 }

@@ -1,7 +1,6 @@
-const { $ } = require('@wdio/globals')
-const Page = require('./BasePage');
+const { $ } = require('@wdio/globals');
 
-class MenuPage extends Page {
+class MenuPage {
     get loginBtn() {
         return driver.isAndroid
             ? $('~Login Menu Item') // Android
@@ -15,10 +14,18 @@ class MenuPage extends Page {
             : $('~LogOut-menu-item'); // iOS
     }
 
+    /**
+     * Clicks login button from Menu page to proceed to Login page.
+     * @returns {void}
+     */
     async clickLoginBtn() {
         await this.loginBtn.click();
     }
 
+    /**
+     * Clicks logout button from Menu page in order to log user out
+     * @returns {void}
+     */
     async logout() {
         await this.logoutBtn.click();
     }
