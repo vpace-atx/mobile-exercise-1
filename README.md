@@ -44,7 +44,7 @@ Setup:
     
     7. Configure ANDROID_HOME and add platform tools to your system's PATH environment variables.
         a. Edit your shell's config file to include 'export PATH=$PATH:/path/to/your/android-sdk/platform-tools'
-        b. Run 'abd devices' to start abd server, and display all attached devices
+        b. Run 'adb devices' to start adb server, and display all attached devices
     
     8. If on MacOS, install xcode
         a. run 'xcode-select --install' to install necessary command-line tools

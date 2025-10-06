@@ -21,9 +21,9 @@ exports.config = {
     // The path of the spec files will be resolved relative from the directory of
     // of the config file unless it's absolute.
     //
-    specs: [
-        './src/tests/**/*.js'
-    ],
+    // specs: [
+    //     './src/tests/**/*.js'
+    // ],
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
@@ -58,7 +58,9 @@ exports.config = {
             'appium:deviceName': 'Android GoogleAPI Emulator',
             'appium:platformVersion': '16.0',
             'appium:automationName': 'UiAutomator2',
-            'appium:appPackage': 'com.saucelabs.mydemoapp.android'
+            'appium:appPackage': 'com.saucelabs.mydemoapp.android',
+            'maxInstances': 5,
+            specs: ['./src/tests/android/**/*.js']
         },
 
         // capabilities for local Appium web tests on an iOS iPhone 15 Pro Simulator
@@ -78,7 +80,9 @@ exports.config = {
             'appium:deviceName': 'iPad Pro (12.9-inch) (6th generation) (16GB)',
             'appium:platformVersion': '26.0',
             'appium:automationName': 'XCUITest',
-            'appium:bundleId': 'com.saucelabs.mydemo.app.ios'
+            'appium:bundleId': 'com.saucelabs.mydemo.app.ios',
+            'maxInstances': 5,
+            specs: ['./src/tests/ios/**/*.js']
         }
     ],
 
