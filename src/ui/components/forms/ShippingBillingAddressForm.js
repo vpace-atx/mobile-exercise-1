@@ -58,17 +58,15 @@ module.exports = class NavigationBarComponent {
     }
 
     get errorMsgAddressLine1() {
-        return $('[id="com.saucelabs.mydemoapp.android:id/address1ErrorTV"]') ;// Android
+        return $('[id="com.saucelabs.mydemoapp.android:id/address1ErrorTV"]') // Android
     }
 
     get errorMsgCity() {
         return $('[id="com.saucelabs.mydemoapp.android:id/cityErrorTV"]'); // Android
-
     }
 
     get errorMsgZipCode() {
         return $('[id="com.saucelabs.mydemoapp.android:id/zipErrorTV"]'); // Android
-
     }
 
     get errorMsgCountry() {
@@ -76,11 +74,11 @@ module.exports = class NavigationBarComponent {
     }
 
     /**
-     * Fills out the shipping/billing address form with valid user data.
+     * Fills out the shipping/billing address form with valid user data on iOS.
      * @param {Object} userData - user data to be entered into Shipping/Billing Address form.
      * @returns {void}
      */
-    async populateForm(userData) {
+    async populateFormIos(userData) {
         await this.fullNameInput.setValue(userData.name);
         await this.addressLine1Input.scrollIntoView();
         await this.addressLine1Input.setValue(userData.billingAddress);
@@ -91,6 +89,22 @@ module.exports = class NavigationBarComponent {
         await this.zipCodeInput.setValue(userData.billingZipCode);
         await this.addressLine2Input.click();
         await this.countryInput.waitForDisplayed({timeout: 5000});
+        await this.countryInput.setValue(userData.country);
+        await browser.hideKeyboard();
+    }
+
+    /**
+     * Fills out the shipping/billing address form with valid user data on Android.
+     * @param {Object} userData - user data to be entered into Shipping/Billing Address form.
+     * @returns {void}
+     */
+    async populateFormAndroid(userData) {
+        await this.fullNameInput.setValue(userData.name);
+        await this.addressLine1Input.scrollIntoView();
+        await this.addressLine1Input.setValue(userData.billingAddress);
+        await this.cityInput.setValue(userData.billingCity);
+        await this.stateInput.setValue(userData.billingState);
+        await this.zipCodeInput.setValue(userData.billingZipCode);
         await this.countryInput.setValue(userData.country);
         await browser.hideKeyboard();
     }

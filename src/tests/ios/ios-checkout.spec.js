@@ -23,7 +23,7 @@ describe('Checkout workflow tests for logged in user on Android device on iOS de
     });
 
     it('user can complete checkout with valid address and payment info on Android device on iOS device', async () => {
-        await CheckoutPage.enterShippingAddress(testUser);
+        await CheckoutPage.enterShippingAddressIos(testUser);
         await PaymentPage.enterPaymentInfo(testUser);
         await PaymentPage.reviewOrder();
         await CheckoutPage.placeOrder();
@@ -31,10 +31,10 @@ describe('Checkout workflow tests for logged in user on Android device on iOS de
     })
 
     it('user can complete checkout different valid billing and shipping addresses on Android device on iOS device', async () => {
-        await CheckoutPage.enterShippingAddress(testUser);
+        await CheckoutPage.enterShippingAddressIos(testUser);
         await PaymentPage.enterPaymentInfo(testUser);
         await PaymentPage.checkDifferentBillingAddress();
-        await PaymentPage.enterBillingInfo(testUser);
+        await PaymentPage.enterBillingInfoIos(testUser);
         await PaymentPage.reviewOrder();
         await CheckoutPage.placeOrder();
         await expect(OrderConfirmationPage.checkoutCompleteText).toHaveText('Checkout Complete');
@@ -46,7 +46,7 @@ describe('Checkout workflow tests for logged in user on Android device on iOS de
     })
 
     it('user cannot complete checkout without payment info on iOS device', async () => {
-        await CheckoutPage.enterShippingAddress(testUser);
+        await CheckoutPage.enterShippingAddressIos(testUser);
         await PaymentPage.reviewOrder();
         await expect(PaymentPage.errorMsgCardName).toHaveText('Value looks invalid.');
     })

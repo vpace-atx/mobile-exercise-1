@@ -17,12 +17,22 @@ class CheckoutPage extends ShippingBillingAddressForm {
     }
 
     /**
-     * Fills out the shipping address form with valid user data then clicks button to proceed to payment page.
+     * Fills out the shipping address form with valid user data then clicks button to proceed to payment page on IOS.
      * @param {Object} userData - user data to be entered into Shipping/Billing Address form.
      * @returns {void}
      */
-    async enterShippingAddress(userData) {
-        await this.populateForm(userData)
+    async enterShippingAddressIos(userData) {
+        await this.populateFormIos(userData)
+        await this.clickToPaymentBtn();
+    }
+
+    /**
+     * Fills out the shipping address form with valid user data then clicks button to proceed to payment page on Android.
+     * @param {Object} userData - user data to be entered into Shipping/Billing Address form.
+     * @returns {void}
+     */
+    async enterShippingAddressAndroid(userData) {
+        await this.populateFormAndroid(userData)
         await this.clickToPaymentBtn();
     }
 

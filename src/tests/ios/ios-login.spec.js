@@ -1,7 +1,6 @@
 const { expect } = require('@wdio/globals');
 const LoginPage = require('../../ui/pages/LoginPage');
 const MenuPage = require('../../ui/pages/MenuPage');
-const LogoutModal = require('../../ui/components/modals/LogoutModal');
 const NavigationBar = require('../../ui/components/navigation/NavigationBarComponent');
 
 describe('Successful login page tests on iOS device', () => {

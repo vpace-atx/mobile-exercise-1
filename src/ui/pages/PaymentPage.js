@@ -101,12 +101,21 @@ class PaymentPage extends ShippingBillingAddressForm {
     }
 
     /**
-     * Fills out the billing address form with valid user data.
+     * Fills out the billing address form with valid user data on iOS.
      * @param {Object} userData - user data to be entered into Shipping/Billing Address form.
      * @returns {void}
      */
-    async enterBillingInfo(userData) {
-        await this.populateForm(userData);
+    async enterBillingInfoIos(userData) {
+        await this.populateFormIos(userData);
+    }
+
+    /**
+     * Fills out the billing address form with valid user data on Android.
+     * @param {Object} userData - user data to be entered into Shipping/Billing Address form.
+     * @returns {void}
+     */
+    async enterBillingInfoAndroid(userData) {
+        await this.populateFormAndroid(userData);
     }
 }
 

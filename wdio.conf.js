@@ -44,7 +44,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 1,
+    maxInstances: 2,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -59,19 +59,9 @@ exports.config = {
             'appium:platformVersion': '16.0',
             'appium:automationName': 'UiAutomator2',
             'appium:appPackage': 'com.saucelabs.mydemoapp.android',
-            'maxInstances': 5,
+            'appium:appActivity': 'com.saucelabs.mydemoapp.android.view.activities.SplashActivity',
             specs: ['./src/tests/android/**/*.js']
         },
-
-        // capabilities for local Appium web tests on an iOS iPhone 15 Pro Simulator
-        // {
-        //     platformName: 'iOS',
-        //     'appium:App': '/Users/vincentpace/Development/qa/caesars-mobile-exercise/Payload/My Demo App.ipa',
-        //     'appium:deviceName': 'iPhone 15 Pro',
-        //     'appium:platformVersion': '17.2',
-        //     'appium:automationName': 'XCUITest',
-        //     'appium:bundleId': 'com.saucelabs.mydemo.app.ios'
-        // },
 
         // capabilities for local Appium web tests on an iOS iPad Pro (12.9-inch) Simulator
         {
@@ -81,7 +71,6 @@ exports.config = {
             'appium:platformVersion': '26.0',
             'appium:automationName': 'XCUITest',
             'appium:bundleId': 'com.saucelabs.mydemo.app.ios',
-            'maxInstances': 5,
             specs: ['./src/tests/ios/**/*.js']
         }
     ],
@@ -133,7 +122,22 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['appium', 'visual'],
+    services: [
+        ['appium', {
+            logPath : './',
+            args: {
+                port: 4723
+            },
+            command: 'appium',
+        }],
+        ['appium', {
+            logPath : './',
+            args: {
+                port: 4725
+            },
+            command: 'appium',
+        }],'visual'],
+
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -259,8 +263,23 @@ exports.config = {
      * @param {boolean} result.passed    true if test has passed, otherwise false
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
+    afterTest: async function (test, context, { error, result, duration, passed, retries }) {
+        if (error) {
+            // Generate a unique filename for the screenshot
+            const screenshotName = `failure_${test.title.replace(/\s/g, '_')}_${Date.now()}.png`;
+            const screenshotPath = `./screenshots/${screenshotName}`; // Define your desired path
+
+            // Take the screenshot
+            await browser.saveScreenshot(screenshotPath);
+            console.log(`Screenshot saved for failed test: ${screenshotPath}`);
+
+            // Optionally, attach the screenshot to your reporting tool (e.g., Allure)
+            // if (process.env.REPORT_TYPE === 'allure') {
+            //     const data = fs.readFileSync(screenshotPath);
+            //     allureReporter.addAttachment('Screenshot on Failure', data, 'image/png');
+            // }
+        }
+    },
 
 
     /**
