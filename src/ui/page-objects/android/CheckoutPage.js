@@ -1,29 +1,13 @@
 const { $ } = require('@wdio/globals');
-const ShippingBillingAddressForm = require('../components/forms/ShippingBillingAddressForm');
+const ShippingBillingAddressForm = require('../../components/forms/ShippingBillingAddressForm');
 
 class CheckoutPage extends ShippingBillingAddressForm {
     get toPaymentBtn() {
-        const iosSelector = '**/XCUIElementTypeButton[`name == "To Payment"`]';
-        return driver.isAndroid
-            ? $('~Saves user info for checkout') // Android
-            : $(`-ios class chain:${iosSelector}`); // iOS
+        return $('~Saves user info for checkout');
     }
 
     get placeOrderBtn() {
-        const iosSelector = '**/XCUIElementTypeButton[`name == "Place Order"`]';
-        return driver.isAndroid
-            ? $('~Completes the process of checkout') // Android
-            : $(`-ios class chain:${iosSelector}`); // iOS
-    }
-
-    /**
-     * Fills out the shipping address form with valid user data then clicks button to proceed to payment page on IOS.
-     * @param {Object} userData - user data to be entered into Shipping/Billing Address form.
-     * @returns {void}
-     */
-    async enterShippingAddressIos(userData) {
-        await this.populateFormIos(userData)
-        await this.clickToPaymentBtn();
+        return $('~Completes the process of checkout');
     }
 
     /**

@@ -1,14 +1,14 @@
 const { expect } = require('@wdio/globals');
-const CartPage = require('../../ui/pages/CartPage');
-const CatalogPage = require('../../ui/pages/CatalogPage');
-const CheckoutPage = require('../../ui/pages/CheckoutPage');
-const LoginPage = require('../../ui/pages/LoginPage');
-const MenuPage = require('../../ui/pages/MenuPage');
-const NavigationBar = require('../../ui/components/navigation/NavigationBarComponent');
-const OrderConfirmationPage = require('../../ui/pages/OrderConfirmationPage');
-const PaymentPage = require('../../ui/pages/PaymentPage');
-const ProductPage = require('../../ui/pages/ProductPage');
-const { testUser } = require("../../data/users");
+const CartPage = require('../../../ui/page-objects/ios/CartPage');
+const CatalogPage = require('../../../ui/page-objects/ios/CatalogPage');
+const CheckoutPage = require('../../../ui/page-objects/ios/CheckoutPage');
+const LoginPage = require('../../../ui/page-objects/ios/LoginPage');
+const MenuPage = require('../../../ui/page-objects/ios/MenuPage');
+const NavigationBar = require('../../../ui/components/navigation/NavigationBarComponent');
+const OrderConfirmationPage = require('../../../ui/page-objects/ios/OrderConfirmationPage');
+const PaymentPage = require('../../../ui/page-objects/ios/PaymentPage');
+const ProductPage = require('../../../ui/page-objects/ios/ProductPage');
+const { testUser } = require("../../../data/users");
 
 describe('Checkout workflow tests for logged in user on Android device on iOS device', () => {
     beforeEach(async () => {

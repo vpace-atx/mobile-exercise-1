@@ -1,8 +1,8 @@
 const { expect } = require('@wdio/globals');
-const LoginPage = require('../../ui/pages/LoginPage');
-const MenuPage = require('../../ui/pages/MenuPage');
-const LogoutModal = require('../../ui/components/modals/LogoutModal');
-const NavigationBar = require('../../ui/components/navigation/NavigationBarComponent');
+const LoginPage = require('../../../ui/page-objects/android/LoginPage');
+const MenuPage = require('../../../ui/page-objects/android/MenuPage');
+const LogoutModal = require('../../../ui/components/modals/LogoutModal');
+const NavigationBar = require('../../../ui/components/navigation/NavigationBarComponent');
 
 describe('Successful login page tests', () => {
     beforeEach(async () => {
@@ -34,11 +34,11 @@ describe('Unsuccessful login page tests', () => {
 
     it('should not allow locked out user to successfully login', async () => {
         await LoginPage.invalidLogin();
-        await expect(LoginPage.userLoggedOutErrorMessage).toHaveText('Sorry this user has been locked out.');
+        await expect(LoginPage.passwordRequiredErrorMessage).toHaveText('Sorry this user has been locked out.');
     })
 
     it('should not allow user without password to login', async () => {
         await LoginPage.attemptLoginWithoutPassword();
-        await expect(LoginPage.userLoggedOutErrorMessage).toHaveText('Enter Password');
+        await expect(LoginPage.passwordRequiredErrorMessage).toHaveText('Enter Password');
     })
 })

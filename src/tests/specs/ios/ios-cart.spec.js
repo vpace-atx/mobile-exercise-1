@@ -1,9 +1,9 @@
 const { expect } = require('@wdio/globals');
-const NavigationBar = require('../../ui/components/navigation/NavigationBarComponent');
-const CartPage = require('../../ui/pages/CartPage');
-const CatalogPage = require("../../ui/pages/CatalogPage");
-const ProductPage = require("../../ui/pages/ProductPage");
-const {calculateTotalPrice} = require("../../utilities/helpers");
+const NavigationBar = require('../../../ui/components/navigation/NavigationBarComponent');
+const CartPage = require('../../../ui/page-objects/ios/CartPage');
+const CatalogPage = require("../../../ui/page-objects/ios/CatalogPage");
+const ProductPage = require("../../../ui/page-objects/ios/ProductPage");
+const {calculateTotalPrice} = require("../../../utilities/helpers");
 
 const quantity = Math.floor(Math.random() * 10) + 1;
 

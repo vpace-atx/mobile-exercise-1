@@ -2,16 +2,11 @@ const { $ } = require('@wdio/globals');
 
 class MenuPage {
     get loginBtn() {
-        return driver.isAndroid
-            ? $('~Login Menu Item') // Android
-            : $('~LogOut-menu-item'); // iOS
-
+        return $('~LogOut-menu-item');
     }
 
     get logoutBtn() {
-        return driver.isAndroid
-            ? $('~Logout Menu Item') // Android
-            : $('~LogOut-menu-item'); // iOS
+        return $('~LogOut-menu-item');
     }
 
     /**

@@ -1,7 +1,7 @@
 const { expect } = require('@wdio/globals');
-const LoginPage = require('../../ui/pages/LoginPage');
-const MenuPage = require('../../ui/pages/MenuPage');
-const NavigationBar = require('../../ui/components/navigation/NavigationBarComponent');
+const LoginPage = require('../../../ui/page-objects/ios/LoginPage');
+const MenuPage = require('../../../ui/page-objects/ios/MenuPage');
+const NavigationBar = require('../../../ui/components/navigation/NavigationBarComponent');
 
 describe('Successful login page tests on iOS device', () => {
     beforeEach(async () => {

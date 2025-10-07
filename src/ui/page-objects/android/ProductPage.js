@@ -2,10 +2,7 @@ const { $ } = require('@wdio/globals');
 
 class ProductPage {
     get addToCartBtn() {
-        return driver.isAndroid
-            ? $('~Tap to add product to cart') // Android
-            : $('~Add To Cart'); // iOS
-
+        return $('~Tap to add product to cart');
     }
 
     /**

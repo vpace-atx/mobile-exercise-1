@@ -68,11 +68,11 @@ Once you have Appium server running and wdio installed, you can run either indiv
     Running individual tests/test files on your machine)
         
         To run targeted tests through the command line, type:
-            'npx wdio run ./wdio.conf.js --spec=./tests/specs/my-test-file.js'
+            'npx wdio run ./src/config/wdio.conf.js --spec=./tests/specs/my-test-file.js'
 
     Running all tests
         
         To run all tests through the command line, type:
-            'npx wdio run ./wdio.conf.js'
+            'npx wdio run ./src/config/wdio.conf.js'
  
         
